@@ -65,6 +65,25 @@
     </div>
 
     <script>
+        // Format number with commas and proper decimal places
+        function formatCurrency(number) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(number);
+        }
+
+        // Format percentage with proper decimal places
+        function formatPercentage(number) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'percent',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(number / 100);
+        }
+
         function calculate() {
             const principal = parseFloat(document.getElementById('principal').value);
             const rate = parseFloat(document.getElementById('rate').value);
@@ -74,17 +93,34 @@
             const amount = principal * Math.pow(1 + (rate / 100) / compounds, compounds * time);
             const interest = amount - principal;
             
+            // Calculate annual return rate
+            const annualReturn = (Math.pow(amount / principal, 1 / time) - 1) * 100;
+            
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = `
-                <h2 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--text-primary);">Results</h2>
-                <div style="display: grid; gap: 1rem;">
+                <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem; color: var(--text-primary);">Investment Summary</h2>
+                <div style="display: grid; gap: 1.5rem;">
                     <div>
-                        <div style="color: var(--text-secondary); font-size: 0.875rem;">Final Amount</div>
-                        <div style="font-size: 1.25rem; font-weight: 600; color: var(--success-color)">$${amount.toFixed(2)}</div>
+                        <div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Final Investment Value</div>
+                        <div style="font-size: 1.5rem; font-weight: 600; color: var(--success-color)">${formatCurrency(amount)}</div>
                     </div>
-                    <div>
-                        <div style="color: var(--text-secondary); font-size: 0.875rem;">Total Interest Earned</div>
-                        <div style="font-size: 1.125rem; color: var(--primary-color)">$${interest.toFixed(2)}</div>
+                    <div class="results-grid" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                        <div>
+                            <div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Initial Investment</div>
+                            <div style="font-size: 1.125rem; color: var(--text-primary)">${formatCurrency(principal)}</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Total Interest Earned</div>
+                            <div style="font-size: 1.125rem; color: var(--primary-color)">${formatCurrency(interest)}</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Annual Return Rate</div>
+                            <div style="font-size: 1.125rem; color: var(--text-primary)">${formatPercentage(annualReturn)}</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Time Period</div>
+                            <div style="font-size: 1.125rem; color: var(--text-primary)">${time} ${time === 1 ? 'year' : 'years'}</div>
+                        </div>
                     </div>
                 </div>
             `;
