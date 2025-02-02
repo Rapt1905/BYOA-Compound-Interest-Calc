@@ -5,30 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compound Interest Calculator</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="calculator">
-        <h2>Compound Interest Calculator</h2>
-        <div class="input-group">
-            <div class="form-group">
-                <label for="principal">Principal Amount ($)</label>
-                <input type="number" id="principal" placeholder="Enter initial amount" required>
-            </div>
-            <div class="form-group">
-                <label for="rate">Annual Interest Rate (%)</label>
-                <input type="number" id="rate" step="0.01" placeholder="Enter interest rate" required>
-            </div>
-            <div class="form-group">
-                <label for="time">Time (Years)</label>
-                <input type="number" id="time" step="0.1" placeholder="Enter time period" required>
-            </div>
-            <div class="form-group">
-                <label for="compounds">Compounds per Year</label>
-                <input type="number" id="compounds" value="12" placeholder="Enter compound frequency" required>
+    <div class="container">
+        <div class="calculator-card">
+            <header class="calculator-header">
+                <h1>Compound Interest Calculator</h1>
+                <p class="subtitle">Calculate your investment's future value</p>
+            </header>
+            
+            <div class="calculator-body">
+                <div class="input-grid">
+                    <div class="form-group">
+                        <label for="principal">Principal Amount</label>
+                        <div class="input-wrapper">
+                            <span class="currency-symbol">$</span>
+                            <input type="number" id="principal" placeholder="0.00" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rate">Annual Interest Rate</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="rate" step="0.01" placeholder="0.00" required>
+                            <span class="percentage-symbol">%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="time">Time Period</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="time" step="0.1" placeholder="0.0" required>
+                            <span class="unit-label">years</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="compounds">Compound Frequency</label>
+                        <select id="compounds" required>
+                            <option value="1">Annually</option>
+                            <option value="2">Semi-annually</option>
+                            <option value="4">Quarterly</option>
+                            <option value="12" selected>Monthly</option>
+                            <option value="365">Daily</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="calculate()">Calculate Results</button>
+                
+                <div class="results-section" id="results"></div>
             </div>
         </div>
-        <button onclick="calculate()">Calculate</button>
-        <div class="results" id="results"></div>
     </div>
     <script src="calculator.js"></script>
 </body>
