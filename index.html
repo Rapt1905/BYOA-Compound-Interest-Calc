@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <h2>Compound Interest Calculator</h2>
+        <div class="input-group">
+            <div class="form-group">
+                <label for="principal">Principal Amount ($)</label>
+                <input type="number" id="principal" placeholder="Enter initial amount" required>
+            </div>
+            <div class="form-group">
+                <label for="rate">Annual Interest Rate (%)</label>
+                <input type="number" id="rate" step="0.01" placeholder="Enter interest rate" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Time (Years)</label>
+                <input type="number" id="time" step="0.1" placeholder="Enter time period" required>
+            </div>
+            <div class="form-group">
+                <label for="compounds">Compounds per Year</label>
+                <input type="number" id="compounds" value="12" placeholder="Enter compound frequency" required>
+            </div>
+        </div>
+        <button onclick="calculate()">Calculate</button>
+        <div class="results" id="results"></div>
+    </div>
+    <script src="calculator.js"></script>
+</body>
+</html> 
